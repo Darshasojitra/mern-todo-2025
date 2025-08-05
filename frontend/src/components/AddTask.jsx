@@ -1,16 +1,33 @@
+import { useState } from 'react'
 import '../style/addtask.css'
 
  export default function AddTask(){
+    const [taskData,setTaskData]=useState();
+    const handleAddTask= async ()=>{
+        console.log(taskData);
+        let result= await fetch('http://localhost:3200/add-task',{
+            method:'Post',
+            body:JSON.stringify(taskData),
+            headers:{
+                'Content-Type':'Application/Json'
+            }
+        })
+        result= await result.json()
+        if(result){
+            console.log("new task added ");
+        }
+        
+    }
     return(
         <div className="container">
             <h1>Add New Task</h1>
-            <form>
+            
                 <label htmlFor="">Title</label>
-                <input type="text" name="title" placeholder="Enter task title"/>
+                <input onChange={(event)=>setTaskData({...taskData,title:event.target.value})} type="text" name="title" placeholder="Enter task title"/>
                 <label htmlFor="">Description</label>
-                <textarea rows={4} name="description" placeholder="Enter task description " id=""></textarea>
-           <button className="submit">Add New Task</button>
-            </form>
+                <textarea onChange={(event)=>setTaskData({...taskData,description:event.target.value})} rows={4} name="description" placeholder="Enter task description " id=""></textarea>
+           <button onClick={handleAddTask} className="submit">Add New Task</button>
+            
         </div>
     )
 }
