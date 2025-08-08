@@ -19,6 +19,23 @@ import { useParams } from 'react-router-dom';
     }
    }
 
+      const updateTask = async()=>{
+        let result= await fetch('http://localhost:3200/update-task',{
+            method:'put',
+            body:JSON.stringify(taskData),
+            headers:{
+                'Content-Type':'Application/Json'
+            }
+        })
+        result= await result.json()
+        if(result){
+            navigate("/")
+           
+        }
+    }
+
+   
+
     return(
         <div className="container">
             <h1>Update Task</h1>
@@ -27,7 +44,7 @@ import { useParams } from 'react-router-dom';
                 <input value={taskData?.title}  onChange={(event)=>setTaskData({...taskData,title:event.target.value})} type="text" name="title" placeholder="Enter task title"/>
                 <label htmlFor="">Description</label>
                 <textarea value={taskData?.description}  onChange={(event)=>setTaskData({...taskData,description:event.target.value})} rows={4} name="description" placeholder="Enter task description " id=""></textarea>
-           <button className="submit">Update Task</button>
+           <button onClick={updateTask} className="submit">Update Task</button>
             
         </div>
     )
