@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export default function List() {
 
     const [taskData, setTaskData] = useState();
+    const [selectedTask,setSelectedTask]=useState([])
 
     useEffect(() => {
         getListData();
@@ -27,10 +28,37 @@ export default function List() {
             
         }
     }
+
+    const selectAll=(event)=>{
+       
+        if(event.target.checked){
+            let items= taskData.map((item)=>item._id)
+            setSelectedTask(items)
+        }else{
+             setSelectedTask([])
+        }
+       
+        
+        
+    }
+
+    const selectSingleItem=(id)=>{
+        console.log(id);
+        if(selectedTask.includes(id)){
+            let items = selectedTask.filter((item)=>item!=id);
+            setSelectedTask(items)
+        }else{
+            setSelectedTask(id,...selectedTask)
+        }
+        
+    }
+
+     console.log(selectedTask);
     return (
         <div>
             <h1>To Do List</h1>
             <ul className="task-list">
+                <li className="list-header"><input onChange={selectAll} type="checkbox" /></li>
                 <li className="list-header">S.No</li>
                 <li className="list-header">Title</li>
                 <li className="list-header">Description</li>
@@ -40,6 +68,7 @@ export default function List() {
                 {
                     taskData && taskData.map((item, index) => (
                         <Fragment key={item._id}>
+                            <li className="list-item" ><input onChange={()=>selectSingleItem(item._id)} checked={selectedTask.includes(item._id)} type="checkbox" /></li>
                             <li className="list-item" >{index+1}</li>
                             <li className="list-item">{item.title}</li>
                             <li className="list-item">{item.description}</li>
