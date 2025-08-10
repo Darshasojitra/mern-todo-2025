@@ -43,25 +43,21 @@ app.get("/task/:id", async (req, resp) => {
 
 })
 
-app.put("/update-task/", async (req, resp) => {
+
+app.put("/update-task", async (req, resp) => {
     const db = await connection();
     const collection = await db.collection(collectionName);
-   const { _id, ...updateFields } = req.body;
-
-    const update = { $set: updateFields };
-    const result = await collection.updateOne(
-      { _id: new ObjectId(_id) },
-      update
-    );
+    const {_id,...fields}=req.body;
+    const update = {$set:fields}
+    console.log(fields)
+    const result = await collection.updateOne({_id:new ObjectId(_id)},update)
     if (result) {
-        resp.send({ message: 'task  updated', success: true, result })
+        resp.send({ message: 'task data updated', success: true, result })
     } else {
         resp.send({ message: 'error try after sometime', success: false })
     }
 
 })
-
-
 
 
 app.delete("/delete/:id", async (req, resp) => {

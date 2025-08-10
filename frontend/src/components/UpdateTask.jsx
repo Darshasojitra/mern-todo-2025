@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import '../style/addtask.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
  export default function UpdateTask(){
     const [taskData,setTaskData]=useState();
+    const navigate = useNavigate()
   
     const {id} =useParams()
 
@@ -19,22 +20,22 @@ import { useParams } from 'react-router-dom';
     }
    }
 
-      const updateTask = async()=>{
-        let result= await fetch('http://localhost:3200/update-task',{
-            method:'put',
-            body:JSON.stringify(taskData),
-            headers:{
-                'Content-Type':'Application/Json'
-            }
-        })
-        result= await result.json()
-        if(result){
-            navigate("/")
-           
+   const updateTask= async ()=>{
+    console.log("function called",taskData);
+    let task = await fetch("http://localhost:3200/update-task",{
+        method:'put',
+        body:JSON.stringify(taskData),
+        headers:{
+            'Content-Type':'Application/Json'
         }
+    });
+    task= await task.json()
+    if(task){
+        navigate('/')
     }
+    
+   }
 
-   
 
     return(
         <div className="container">
