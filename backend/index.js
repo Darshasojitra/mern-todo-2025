@@ -6,7 +6,39 @@ import jwt from 'jsonwebtoken'
 const app = e();
 
 app.use(e.json());
-app.use(cors());
+
+
+app.post("/login", async (req, resp) => {
+    const userData = req.body;
+    if (userData.email && userData.password) {
+        const db = await connection();
+        const collection = await db.collection('users');
+        const result = await collection.findOne({email:userData.email,password:userData.password});
+        if (result) {
+            jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
+                resp.send({
+                    success: true,
+                    msg: 'login done',
+                    token
+                })
+
+            })
+        }else{
+            resp.send({
+            success: false,
+            msg: 'User not found',
+        }) 
+        }
+
+    } else {
+        resp.send({
+            success: false,
+            msg: 'login not done',
+        })
+    }
+
+})
+
 
 app.post("/signup", async (req, resp) => {
     const userData = req.body;
@@ -47,6 +79,7 @@ app.post("/add-task", async (req, resp) => {
 
 app.get("/tasks", async (req, resp) => {
     const db = await connection();
+       
     const collection = await db.collection(collectionName);
     const result = await collection.find().toArray();
     if (result) {
@@ -76,7 +109,6 @@ app.put("/update-task", async (req, resp) => {
     const collection = await db.collection(collectionName);
     const { _id, ...fields } = req.body;
     const update = { $set: fields }
-    console.log(fields)
     const result = await collection.updateOne({ _id: new ObjectId(_id) }, update)
     if (result) {
         resp.send({ message: 'task data updated', success: true, result })
