@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../style/addtask.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
  export default function SignUp(){
 
     const [userData,setUserData]=useState()
+    const navigate= useNavigate()
+useEffect(()=>{
+    if(localStorage.getItem('login')){
+        navigate('/')
+    }
+})
 
     const handleSignUp= async()=>{
             console.log(userData);
@@ -15,10 +21,14 @@ import { Link } from 'react-router-dom'
             }
         })
         result= await result.json()
-        if(result){
+        if(result.success){
            console.log(result);
            document.cookie="token="+result.token
+           localStorage.setItem('login',userData.email)
+           navigate('/')
     
+        }else{
+            alert("Try after sometime")
         }
     }
     return(
