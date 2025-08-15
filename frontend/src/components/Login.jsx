@@ -4,6 +4,24 @@ import { Link } from 'react-router-dom'
  export default function Login(){
 
     const [userData,setUserData]=useState()
+
+      const handleLogin= async()=>{
+            console.log(userData);
+        let result= await fetch('http://localhost:3200/login',{
+            method:'Post',
+            body:JSON.stringify(userData),
+            headers:{
+                'Content-Type':'Application/Json'
+            }
+        })
+        result= await result.json()
+        if(result){
+           console.log(result);
+           document.cookie="token="+result.token
+    
+        }
+    }
+
     return(
         <div className="container">
             <h1>Login</h1>
@@ -17,7 +35,7 @@ import { Link } from 'react-router-dom'
                 <input 
                 onChange={(event)=>setUserData({...userData,password:event.target.value})} 
                 type="text" name="password" placeholder="Enter user password "/>
-           <button onClick={()=>console.log(userData)} className="submit">Login</button>
+           <button onClick={handleLogin} className="submit">Login</button>
            <Link className='link' to="/signup">Sign up</Link>
             
         </div>
