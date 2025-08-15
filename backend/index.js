@@ -3,17 +3,22 @@ import { collectionName, connection } from "./dbconfig.js";
 import cors from 'cors';
 import { ObjectId } from "mongodb";
 import jwt from 'jsonwebtoken'
+import cookieParser from "cookie-parser";
 const app = e();
 
 app.use(e.json());
-
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
+app.use(cookieParser());
 
 app.post("/login", async (req, resp) => {
     const userData = req.body;
     if (userData.email && userData.password) {
         const db = await connection();
         const collection = await db.collection('users');
-        const result = await collection.findOne({email:userData.email,password:userData.password});
+        const result = await collection.findOne({ email: userData.email, password: userData.password });
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
                 resp.send({
@@ -23,11 +28,11 @@ app.post("/login", async (req, resp) => {
                 })
 
             })
-        }else{
+        } else {
             resp.send({
-            success: false,
-            msg: 'User not found',
-        }) 
+                success: false,
+                msg: 'User not found',
+            })
         }
 
     } else {
@@ -77,9 +82,9 @@ app.post("/add-task", async (req, resp) => {
 
 })
 
-app.get("/tasks", async (req, resp) => {
+app.get("/tasks", verifyJWTToken, async (req, resp) => {
     const db = await connection();
-       
+
     const collection = await db.collection(collectionName);
     const result = await collection.find().toArray();
     if (result) {
@@ -89,6 +94,22 @@ app.get("/tasks", async (req, resp) => {
     }
 
 })
+
+function verifyJWTToken(req, resp, next) {
+    //  console.log("verifyJWTToken ", req.cookies['token']);
+    const token = req.cookies['token'];
+    jwt.verify(token, 'Google', (error, decoded) => {
+        if(error){
+            return resp.send({
+                msg:"invalid token",
+                success:false
+            })
+        }
+         next()
+    })
+   
+
+}
 
 app.get("/task/:id", async (req, resp) => {
     const db = await connection();
