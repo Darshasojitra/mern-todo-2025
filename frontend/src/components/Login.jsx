@@ -24,6 +24,7 @@ useEffect(()=>{
         if(result.success){
            document.cookie="token="+result.token;
            localStorage.setItem('login',userData.email)
+           window.dispatchEvent(new Event('localStorage-change'))
            navigate('/')
 
     

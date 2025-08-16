@@ -70,7 +70,7 @@ app.post("/signup", async (req, resp) => {
     }
 
 })
-app.post("/add-task", async (req, resp) => {
+app.post("/add-task",verifyJWTToken, async (req, resp) => {
     const db = await connection();
     const collection = await db.collection(collectionName);
     const result = await collection.insertOne(req.body);
@@ -95,23 +95,8 @@ app.get("/tasks", verifyJWTToken, async (req, resp) => {
 
 })
 
-function verifyJWTToken(req, resp, next) {
-    //  console.log("verifyJWTToken ", req.cookies['token']);
-    const token = req.cookies['token'];
-    jwt.verify(token, 'Google', (error, decoded) => {
-        if(error){
-            return resp.send({
-                msg:"invalid token",
-                success:false
-            })
-        }
-         next()
-    })
-   
 
-}
-
-app.get("/task/:id", async (req, resp) => {
+app.get("/task/:id",verifyJWTToken, async (req, resp) => {
     const db = await connection();
     const collection = await db.collection(collectionName);
     const id = req.params.id
@@ -125,7 +110,7 @@ app.get("/task/:id", async (req, resp) => {
 })
 
 
-app.put("/update-task", async (req, resp) => {
+app.put("/update-task", verifyJWTToken,async (req, resp) => {
     const db = await connection();
     const collection = await db.collection(collectionName);
     const { _id, ...fields } = req.body;
@@ -140,7 +125,7 @@ app.put("/update-task", async (req, resp) => {
 })
 
 
-app.delete("/delete/:id", async (req, resp) => {
+app.delete("/delete/:id", verifyJWTToken,async (req, resp) => {
     const db = await connection();
     const id = req.params.id
     const collection = await db.collection(collectionName);
@@ -153,7 +138,7 @@ app.delete("/delete/:id", async (req, resp) => {
 
 })
 
-app.delete("/delete-multiple", async (req, resp) => {
+app.delete("/delete-multiple",verifyJWTToken, async (req, resp) => {
     const db = await connection();
     const Ids = req.body;
     const deleteTaskIds = Ids.map((item) => new ObjectId(item))
@@ -169,6 +154,21 @@ app.delete("/delete-multiple", async (req, resp) => {
 
 })
 
+
+function verifyJWTToken(req, resp, next) {
+    //  console.log("verifyJWTToken ", req.cookies['token']);
+    const token = req.cookies['token'];
+    jwt.verify(token, 'Google', (error, decoded) => {
+        if(error){
+            return resp.send({
+                msg:"invalid token",
+                success:false
+            })
+        }
+         next()
+    })
+   
+}
 
 
 
