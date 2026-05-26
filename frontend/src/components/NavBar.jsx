@@ -31,16 +31,7 @@ function NavBar() {
         <nav className='navbar'>
             <div className='logo'>To Do App</div>
             <ul className='nav-links'>
-                /* {
-                    login ?
-                        <>
-                            <li><Link to="/">List</Link></li>
-                            <li><Link to="/add">Add Task</Link></li>
-                            <li><Link onClick={logout} >Logout</Link></li>
-
-                        </> : null
-
-                } */
+                
                 {
                     login ? 
                         <>
