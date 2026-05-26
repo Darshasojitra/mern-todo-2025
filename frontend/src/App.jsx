@@ -1,12 +1,13 @@
 
 // import './style/app.css'
 import './style/App.css'
-import NavBar from './components/navbar'
+// import NavBar from './components/navbar'
+import Navbar from "./components/NavBar"
 import { Routes,Route } from 'react-router-dom'
 import AddTask from './components/AddTask'
 import List from './components/List'
 import UpdateTask from './components/UpdateTask'
-import SignUp from './components/Signup'
+import SignUp from './components/SignUp'
 import Login from './components/Login'
 import Protected from './components/Protected'
 
