@@ -7,18 +7,19 @@ import cookieParser from "cookie-parser";
 const app = e();
 
 app.use(e.json());
-// app.use(cors({
-//     origin: 'http://localhost:5173',
-//     credentials: true
-// }))
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://mern-todo-2025-1.onrender.com"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+    origin: 'https://mern-todo-2025-1.onrender.com',
+    credentials: true
+}))
+
+// app.use(cors({
+//   origin: [
+//     "http://localhost:5173",
+//     "https://mern-todo-2025-1.onrender.com"
+//   ],
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
 app.use(cookieParser());
 
 app.post("/login", async (req, resp) => {
@@ -205,9 +206,9 @@ function verifyJWTToken(req, resp, next) {
 
 import path from "path";
 const __dirname = path.resolve();
-app.use(e.static(path.join(__dirname, "frontend/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
+app.use(e.static(path.join(__dirname, "../frontend/dist")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 // app.listen(3200)
