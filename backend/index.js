@@ -174,13 +174,22 @@ app.delete("/delete-multiple",verifyJWTToken, async (req, resp) => {
 
 
 function verifyJWTToken(req, resp, next) {
-    //  console.log("verifyJWTToken ", req.cookies['token']);
+     console.log("verifyJWTToken ", req.cookies['token']);
     // const token = req.cookies['token'];
-   const header = req.headers['authorization'];
-    if (!header) {
-        return resp.send({ success: false, msg: "No token provided" });
+  
+   // const header = req.headers['authorization'];
+   //  if (!header) {
+   //      return resp.send({ success: false, msg: "No token provided" });
+   //  }
+   //  const token = header.split(' ')[1];
+  const token = req.cookies.token;
+    if (!token) {
+        return resp.send({
+            success: false,
+            msg: "No token provided"
+        });
     }
-    const token = header.split(' ')[1];
+
   
     jwt.verify(token, 'Google', (error, decoded) => {
         if(error){
@@ -194,7 +203,12 @@ function verifyJWTToken(req, resp, next) {
    
 }
 
-
+import path from "path";
+const __dirname = path.resolve();
+app.use(e.static(path.join(__dirname, "frontend/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
+});
 
 // app.listen(3200)
 const PORT = process.env.PORT || 3300;
@@ -202,9 +216,4 @@ app.listen(PORT, () => {
   console.log("Server running on port", PORT);
 });
 
-import path from "path";
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "frontend/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
-});
+
