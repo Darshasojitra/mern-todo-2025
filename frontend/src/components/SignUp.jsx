@@ -17,13 +17,13 @@ useEffect(()=>{
             method:'Post',
             body:JSON.stringify(userData),
             headers:{
-                'Content-Type':'Application/Json'
+                'Content-Type':'application/json'
             }
         })
         result= await result.json()
         if(result.success){
            console.log(result);
-           document.cookie="token="+result.token
+           // document.cookie="token="+result.token
            localStorage.setItem('login',userData.email)
            navigate('/')
     
