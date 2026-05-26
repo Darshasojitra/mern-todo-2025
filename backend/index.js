@@ -29,6 +29,11 @@ app.post("/login", async (req, resp) => {
         const result = await collection.findOne({ email: userData.email, password: userData.password });
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
+              resp.cookie('token', token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none"
+                });
                 resp.send({
                     success: true,
                     msg: 'login done',
@@ -61,6 +66,11 @@ app.post("/signup", async (req, resp) => {
         const result = await collection.insertOne(userData);
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
+                resp.cookie('token', token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none"
+                });
                 resp.send({
                     success: true,
                     msg: 'signup done',
@@ -173,16 +183,6 @@ function verifyJWTToken(req, resp, next) {
     const token = header.split(' ')[1];
   
     jwt.verify(token, 'Google', (error, decoded) => {
-       resp.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none"
-    });
-
-    resp.send({
-        success: true,
-        msg: 'login done'
-    });
         if(error){
             return resp.send({
                 msg:"invalid token",
@@ -200,4 +200,11 @@ function verifyJWTToken(req, resp, next) {
 const PORT = process.env.PORT || 3300;
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
+});
+
+import path from "path";
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "frontend/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
 });
