@@ -13,7 +13,7 @@ useEffect(()=>{
 
     const handleSignUp= async()=>{
             console.log(userData);
-        let result= await fetch('http://localhost:3200/signup',{
+        let result= await fetch(`${import.meta.env.VITE_API_URL}/signup`,{
             method:'Post',
             body:JSON.stringify(userData),
             headers:{
