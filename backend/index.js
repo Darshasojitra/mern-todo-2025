@@ -173,6 +173,16 @@ function verifyJWTToken(req, resp, next) {
     const token = header.split(' ')[1];
   
     jwt.verify(token, 'Google', (error, decoded) => {
+       resp.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
+
+    resp.send({
+        success: true,
+        msg: 'login done'
+    });
         if(error){
             return resp.send({
                 msg:"invalid token",
