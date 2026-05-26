@@ -13,7 +13,7 @@ useEffect(()=>{
 })
       const handleLogin= async()=>{
             console.log(userData);
-        let result= await fetch('http://localhost:3200/login',{
+        let result= await fetch(`${import.meta.env.VITE_API_URL}/login`,{
             method:'Post',
             body:JSON.stringify(userData),
             headers:{
