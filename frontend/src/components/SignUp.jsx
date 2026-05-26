@@ -24,6 +24,7 @@ useEffect(()=>{
         if(result.success){
            console.log(result);
            // document.cookie="token="+result.token
+          localStorage.setItem("token", result.token);
            localStorage.setItem('login',userData.email)
            navigate('/')
     
