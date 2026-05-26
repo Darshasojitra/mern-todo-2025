@@ -7,10 +7,18 @@ import cookieParser from "cookie-parser";
 const app = e();
 
 app.use(e.json());
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     credentials: true
+// }))
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://mern-todo-2025-1.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(cookieParser());
 
 app.post("/login", async (req, resp) => {
