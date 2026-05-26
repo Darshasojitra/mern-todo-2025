@@ -13,7 +13,11 @@ import { useNavigate, useParams } from 'react-router-dom';
     },[])
 
    const getTask = async(id)=>{
-    let task= await fetch(`${import.meta.env.VITE_API_URL}/task/`+id);
+    let task= await fetch(`${import.meta.env.VITE_API_URL}/task/`+id,{
+     headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }});
     task = await task.json()
     if(task.result){
         setTaskData(task.result)
@@ -25,9 +29,13 @@ import { useNavigate, useParams } from 'react-router-dom';
     let task = await fetch(`${import.meta.env.VITE_API_URL}/update-task`,{
         method:'put',
         body:JSON.stringify(taskData),
-        headers:{
-            'Content-Type':'Application/Json'
-        }
+        // headers:{
+        //     'Content-Type':'Application/Json'
+        // }
+     headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
     });
     task= await task.json()
     if(task){
