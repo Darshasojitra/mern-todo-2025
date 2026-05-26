@@ -30,15 +30,16 @@ app.post("/login", async (req, resp) => {
         const result = await collection.findOne({ email: userData.email, password: userData.password });
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
-              resp.cookie('token', token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: "none"
+                resp.cookie('token', token, {
+                  httpOnly: true,
+                  secure: true,
+                  sameSite: "none",
+                  path: "/"
                 });
                 resp.send({
                     success: true,
                     msg: 'login done',
-                    token
+                    // token
                 })
 
             })
@@ -67,15 +68,16 @@ app.post("/signup", async (req, resp) => {
         const result = await collection.insertOne(userData);
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
-                resp.cookie('token', token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: "none"
+                 resp.cookie('token', token, {
+                  httpOnly: true,
+                  secure: true,
+                  sameSite: "none",
+                  path: "/"
                 });
                 resp.send({
                     success: true,
                     msg: 'signup done',
-                    token
+                    // token
                 })
 
             })
