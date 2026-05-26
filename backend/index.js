@@ -9,7 +9,7 @@ const app = e();
 app.use(e.json());
 app.use(cors({
     origin: 'https://mern-todo-2025-1.onrender.com',
-    credentials: true
+    credentials: false
 }))
 
 // app.use(cors({
@@ -30,16 +30,16 @@ app.post("/login", async (req, resp) => {
         const result = await collection.findOne({ email: userData.email, password: userData.password });
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
-                resp.cookie('token', token, {
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: "none",
-                  path: "/"
-                });
+                // resp.cookie('token', token, {
+                //   httpOnly: true,
+                //   secure: true,
+                //   sameSite: "none",
+                //   path: "/"
+                // });
                 resp.send({
                     success: true,
                     msg: 'login done',
-                    // token
+                    token
                 })
 
             })
@@ -68,16 +68,16 @@ app.post("/signup", async (req, resp) => {
         const result = await collection.insertOne(userData);
         if (result) {
             jwt.sign(userData, 'Google', { expiresIn: '5d' }, (error, token) => {
-                 resp.cookie('token', token, {
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: "none",
-                  path: "/"
-                });
+                //  resp.cookie('token', token, {
+                //   httpOnly: true,
+                //   secure: true,
+                //   sameSite: "none",
+                //   path: "/"
+                // });
                 resp.send({
                     success: true,
                     msg: 'signup done',
-                    // token
+                    token
                 })
 
             })
@@ -179,19 +179,18 @@ app.delete("/delete-multiple",verifyJWTToken, async (req, resp) => {
 function verifyJWTToken(req, resp, next) {
      console.log("verifyJWTToken ", req.cookies['token']);
     // const token = req.cookies['token'];
-  
-   // const header = req.headers['authorization'];
-   //  if (!header) {
-   //      return resp.send({ success: false, msg: "No token provided" });
-   //  }
-   //  const token = header.split(' ')[1];
-  const token = req.cookies.token;
-    if (!token) {
-        return resp.send({
-            success: false,
-            msg: "No token provided"
-        });
+   const header = req.headers['authorization'];
+    if (!header) {
+        return resp.send({ success: false, msg: "No token provided" });
     }
+    const token = header.split(' ')[1];
+  // const token = req.cookies.token;
+  //   if (!token) {
+  //       return resp.send({
+  //           success: false,
+  //           msg: "No token provided"
+  //       });
+  //   }
 
   
     jwt.verify(token, 'Google', (error, decoded) => {
