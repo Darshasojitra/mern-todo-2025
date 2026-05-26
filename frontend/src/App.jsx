@@ -2,7 +2,7 @@
 // import './style/app.css'
 import './style/App.css'
 // import NavBar from './components/navbar'
-import Navbar from "./components/NavBar"
+import NavBar from "./components/NavBar"
 import { Routes,Route } from 'react-router-dom'
 import AddTask from './components/AddTask'
 import List from './components/List'
