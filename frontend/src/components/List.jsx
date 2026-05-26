@@ -13,7 +13,11 @@ export default function List() {
 
     const getListData = async () => {
         let list = await fetch(`${import.meta.env.VITE_API_URL}/tasks`,{
-            credentials:'include'
+            // credentials:'include'
+            headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
         });
         list = await list.json()
         if (list.success) {
@@ -25,7 +29,12 @@ export default function List() {
     }
 
     const deleteTask= async(id)=>{
- let item = await fetch(`${import.meta.env.VITE_API_URL}/delete/`+id,{method:'delete',credentials:'include'});
+ let item = await fetch(`${import.meta.env.VITE_API_URL}/delete/`+id,{method:'delete',
+            headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }});
+        // ,credentials:'include'});
         item = await item.json()
         if (item.success) {
             getListData()
@@ -63,12 +72,14 @@ export default function List() {
         console.log(selectedTask);
 
          let item = await fetch(`${import.meta.env.VITE_API_URL}/delete-multiple/`,
-            {credentials:'include',
+            {
+                // credentials:'include',
                 method:'delete',
                 body:JSON.stringify(selectedTask),
-                headers:{
-                    'Content-Type':'Application/Json'
-                }
+                headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
 
             }
         );
