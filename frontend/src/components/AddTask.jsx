@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
     const navigate=useNavigate();
     const handleAddTask= async ()=>{
         console.log(taskData);
-        let result= await fetch('http://localhost:3200/add-task',{
+        let result= await fetch(`${import.meta.env.VITE_API_URL}/add-task`,{
             method:'Post',
             body:JSON.stringify(taskData),
             credentials:'include',
