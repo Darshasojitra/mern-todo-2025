@@ -12,7 +12,8 @@ import { useNavigate } from 'react-router-dom';
             body:JSON.stringify(taskData),
             credentials:'include',
             headers:{
-                'Content-Type':'Application/Json'
+                'Content-Type':'Application/Json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         })
         result= await result.json()
