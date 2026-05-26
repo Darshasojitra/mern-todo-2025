@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
         let result= await fetch(`${import.meta.env.VITE_API_URL}/add-task`,{
             method:'Post',
             body:JSON.stringify(taskData),
-            credentials:'include',
+            // credentials:'include',
             headers:{
                 'Content-Type':'Application/Json',
                 Authorization: `Bearer ${localStorage.getItem("token")}`
