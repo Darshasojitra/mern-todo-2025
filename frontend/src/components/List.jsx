@@ -12,7 +12,7 @@ export default function List() {
     }, [])
 
     const getListData = async () => {
-        let list = await fetch(`${import.meta.env.VITE_API_URL}/task`,{
+        let list = await fetch(`${import.meta.env.VITE_API_URL}/tasks`,{
             credentials:'include'
         });
         list = await list.json()
