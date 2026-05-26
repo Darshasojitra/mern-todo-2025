@@ -207,7 +207,7 @@ function verifyJWTToken(req, resp, next) {
 import path from "path";
 const __dirname = path.resolve();
 app.use(e.static(path.join(__dirname, "../frontend/dist")));
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
