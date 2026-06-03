@@ -32,14 +32,17 @@ function NavBar() {
 
 const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  }
+  // const toggleMenu = () => {
+  //   setIsOpen(!isOpen);
+  // }
+      const toggleMenu = () => {
+        setIsOpen(prev => !prev);
+    }
     
     return (
         <nav className='navbar'>
             <div className='logo'>To Do App</div>
-             <div class="menu-toggle" id="menu-toggle" onClick={toggleMenu} >
+             <div className="menu-toggle" id="menu-toggle" onClick={toggleMenu} >
         ☰
     </div>
             
