@@ -168,10 +168,30 @@
         gap: 8px;
     }
 
-      .task-list li:nth-child(5n + 1) {
-        margin-top: 12px;
+    .task-list {
+        row-gap: 14px;   /* main spacing between todos */
+    }
+
+    /* 🔥 give each todo group a visual block feel */
+    .task-list li:nth-child(5n + 1),
+    .task-list li:nth-child(5n + 2),
+    .task-list li:nth-child(5n + 3),
+    .task-list li:nth-child(5n + 4),
+    .task-list li:nth-child(5n + 5) {
+        background: #f9f9f9;
+    }
+
+    /* 🔥 add padding only once per block */
+    .task-list li:nth-child(5n + 1) {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
         padding-top: 10px;
-        border-top: 1px solid #ddd;
+    }
+
+    .task-list li:nth-child(5n + 5) {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding-bottom: 10px;
     }
 
     /* optional: first row no extra gap */
