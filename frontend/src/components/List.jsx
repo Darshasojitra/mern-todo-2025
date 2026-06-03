@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react"
-// import '../style/list.css'
+import '../style/list.css'
 import { Link } from "react-router-dom";
 
 export default function List() {
