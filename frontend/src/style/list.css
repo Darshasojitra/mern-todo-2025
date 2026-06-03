@@ -1,12 +1,12 @@
 .list-container h1{
-     margin: 10;
+     margin: 10px;
 }
 .task-list{
     display: grid;
     gap:10px;
     list-style: none;
     padding: 0;
-    margin: 20px;
+    margin-top: 10px;
     grid-template-columns: 100px 50px 1fr 2fr 200px;
 }
 
