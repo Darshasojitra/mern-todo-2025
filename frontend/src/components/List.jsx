@@ -108,17 +108,31 @@ export default function List() {
 
                 {
                     taskData && taskData.map((item, index) => (
-                        <Fragment key={item._id}>
-                            <li className="list-item" ><input onChange={()=>selectSingleItem(item._id)} checked={selectedTask.includes(item._id)} type="checkbox" /></li>
-                            <li className="list-item" >{index+1}</li>
-                            <li className="list-item">{item.title}</li>
-                            <li className="list-item">{item.description}</li>
-                            <li className="list-item">
-                                <button onClick={()=>deleteTask(item._id)} className="delete-item">Delete</button>
-                                <Link to={"update/"+item._id} className="update-item">Update</Link>
-                                </li>
+                        // <Fragment key={item._id}>
+                        //     <li className="list-item" ><input onChange={()=>selectSingleItem(item._id)} checked={selectedTask.includes(item._id)} type="checkbox" /></li>
+                        //     <li className="list-item" >{index+1}</li>
+                        //     <li className="list-item">{item.title}</li>
+                        //     <li className="list-item">{item.description}</li>
+                        //     <li className="list-item">
+                        //         <button onClick={()=>deleteTask(item._id)} className="delete-item">Delete</button>
+                        //         <Link to={"update/"+item._id} className="update-item">Update</Link>
+                        //         </li>
 
-                            </Fragment>
+                        //     </Fragment>
+
+                        <div className="task-row" key={item._id}>
+    <li className="list-item">
+        <input onChange={()=>selectSingleItem(item._id)} checked={selectedTask.includes(item._id)} type="checkbox" />
+    </li>
+    <li className="list-item">{index+1}</li>
+    <li className="list-item">{item.title}</li>
+    <li className="list-item">{item.description}</li>
+    <li className="list-item">
+        <button onClick={()=>deleteTask(item._id)} className="delete-item">Delete</button>
+        <Link to={"update/"+item._id} className="update-item">Update</Link>
+    </li>
+</div>
+                        
                     ))
                 }
             </ul>
