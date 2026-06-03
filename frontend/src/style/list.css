@@ -103,3 +103,104 @@
     margin-left: 20px;
     margin-right: 20px;
 }
+
+
+
+
+
+/* =========================
+   MOBILE (≤550px) — GRID WRAP UI
+========================= */
+@media (max-width: 550px) {
+
+    .task-list {
+        grid-template-columns: 1fr 1fr; /* 2 columns instead of 5 */
+        gap: 8px;
+    }
+
+    /* hide header for mobile */
+    .list-header {
+        display: none;
+    }
+
+    /* base item */
+    .list-item {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* checkbox + s.no row */
+    .task-list li:nth-child(5n + 1),
+    .task-list li:nth-child(5n + 2) {
+        grid-column: span 1;
+    }
+
+    /* title full width */
+    .task-list li:nth-child(5n + 3) {
+        grid-column: span 2;
+        font-weight: 600;
+        background: #f9f9f9;
+    }
+
+    /* 🔥 description goes FULL next row */
+    .task-list li:nth-child(5n + 4) {
+        grid-column: span 2;
+        font-size: 13px;
+        color: #666;
+        background: #fff;
+    }
+
+    /* 🔥 actions also go FULL next row */
+    .task-list li:nth-child(5n + 5) {
+        grid-column: span 2;
+        display: flex;
+        gap: 10px;
+    }
+
+    /* buttons fix */
+    .delete-item,
+    .update-item {
+        flex: 1;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* button colors improve */
+    .delete-item {
+        background-color: #ef4444;
+    }
+
+    .delete-item:hover {
+        background-color: #dc2626;
+    }
+
+    .update-item {
+        background-color: #3b82f6;
+    }
+
+    .update-item:hover {
+        background-color: #2563eb;
+    }
+
+    /* container padding */
+    .list-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    /* delete multiple button full width */
+    .delete-multiple {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
