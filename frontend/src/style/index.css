@@ -2,3 +2,148 @@ body{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+
+/* =========================
+   GLOBAL
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #242424;
+    color: #fff;
+    padding: 12px 24px;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Desktop Menu */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #bfbcbc;
+}
+
+/* Hamburger */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 12px 18px;
+    }
+
+    .nav-links {
+        gap: 18px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #242424;
+
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        padding: 20px 0;
+
+        display: none;
+
+        border-top: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .nav-links a:hover {
+        background-color: #333;
+        color: white;
+    }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+    }
+}
