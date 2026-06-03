@@ -27,9 +27,21 @@ function NavBar() {
             window.removeEventListener("localStorage-change", handleStorage)
         }
     }, [])
+
+    const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+});
+    
     return (
         <nav className='navbar'>
             <div className='logo'>To Do App</div>
+             <div class="menu-toggle" id="menu-toggle">
+        ☰
+    </div>
+            
             <ul className='nav-links'>
                 
                 {
