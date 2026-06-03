@@ -46,7 +46,7 @@ const [isOpen, setIsOpen] = useState(false);
         ☰
     </div>
             
-            <ul className={`nav-links ${isOpen ? "active" : ""}`} >
+            <ul className={`nav-links ${isOpen ? "active" : ""}`}  onClick={toggleMenu} >
                 
                 {
                     login ? 
