@@ -50,6 +50,9 @@
 .list-header{
     font-weight: bold;
     padding: 10px;
+    /* margin:auto; */
+     display: flex;
+    justify-content: center;
     border:  1px solid #ccc;
     background-color: #f0f0f0;
 }
