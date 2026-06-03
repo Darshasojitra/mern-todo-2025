@@ -105,51 +105,101 @@
 }
 
 
-.task-row {
-    display: contents; /* keeps grid working */
-}
 
 
+
+/* =========================
+   MOBILE (≤550px) — GRID WRAP UI
+========================= */
 @media (max-width: 550px) {
 
     .task-list {
-        display: block;   /* 🔥 remove grid completely */
+        grid-template-columns: 40px 40px 1fr;
+        gap: 6px;
     }
+     
 
+    /* compact header instead of removing */
     .list-header {
-        display: none;    /* hide header */
+        font-size: 12px;
+        padding: 6px;
+        text-align: center;
     }
 
+    /* hide description header only */
+    /* .task-list .list-header:nth-child(4), */
+    .task-list .list-header:nth-child(5) {
+        display: none;
+    }
+
+    /* base item */
     .list-item {
-        display: block;
-        margin-bottom: 12px;
-        padding: 10px;
-        border-radius: 8px;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
+        padding: 6px;
+        font-size: 13px;
     }
 
-    /* group spacing */
-    .list-item:nth-child(5n + 5) {
-        margin-bottom: 20px;
+    /* checkbox */
+    .task-list li:nth-child(5n + 1) {
+        grid-column: span 1;
     }
 
-    /* title highlight */
-    .list-item:nth-child(5n + 3) {
+    /* s.no */
+    .task-list li:nth-child(5n + 2) {
+        grid-column: span 1;
+    }
+
+    /* title */
+    .task-list li:nth-child(5n + 3) {
+        grid-column: span 1;
         font-weight: 600;
     }
 
-    /* description */
-    .list-item:nth-child(5n + 4) {
-        font-size: 13px;
+    /* description FULL row */
+    .task-list li:nth-child(5n + 4) {
+        grid-column: span 3;
+        font-size: 12px;
         color: #666;
     }
 
-    /* actions */
-    .list-item:nth-child(5n + 5) {
+    /* actions FULL row */
+    .task-list li:nth-child(5n + 5) {
+        grid-column: span 3;
         display: flex;
         gap: 8px;
     }
+
+    .task-list {
+        row-gap: 14px;   /* main spacing between todos */
+    }
+
+    /* 🔥 give each todo group a visual block feel */
+    .task-list li:nth-child(5n + 1),
+    .task-list li:nth-child(5n + 2),
+    .task-list li:nth-child(5n + 3),
+    .task-list li:nth-child(5n + 4),
+    .task-list li:nth-child(5n + 5) {
+        background: #f9f9f9;
+    }
+
+    /* 🔥 add padding only once per block */
+    .task-list li:nth-child(5n + 1) {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding-top: 10px;
+    }
+
+    .task-list li:nth-child(5n + 5) {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* optional: first row no extra gap */
+    .task-list li:nth-child(1) {
+        margin-top: 0;
+        border-top: none;
+    }
+     
 
     /* buttons */
     .delete-item,
@@ -158,26 +208,36 @@
         width: 100%;
         margin: 0;
         text-align: center;
+        font-size: 13px;
+        padding: 6px;
     }
 
     .delete-item {
         background-color: #ef4444;
     }
 
+    .delete-item:hover {
+        background-color: #dc2626;
+    }
+
     .update-item {
         background-color: #3b82f6;
+    }
+
+    .update-item:hover {
+        background-color: #2563eb;
+    }
+
+    /* delete multiple */
+    .delete-multiple {
+        width: 100px;
+        margin-bottom: 10px;
     }
 
     .list-container {
         margin: 10px;
     }
-
-    .delete-multiple {
-        width: 100%;
-        margin-bottom: 10px;
-    }
 }
-
 
 
 
