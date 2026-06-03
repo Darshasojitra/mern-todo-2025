@@ -11,11 +11,11 @@
 @media (max-width: 768px) {
 
     .task-list {
-        display: block; /* 🔥 IMPORTANT */
+        display: block; 
     }
 
     .list-header {
-        display: none; /* hide header */
+        display: none;
     }
 
     .list-item {
@@ -25,13 +25,12 @@
         padding: 12px;
     }
 
-    /* Each column becomes row */
+   
     .list-item > * {
         display: block;
         margin-bottom: 8px;
     }
 
-    /* Buttons full width */
     .delete-item,
     .update-item {
         width: 100%;
