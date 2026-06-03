@@ -51,13 +51,13 @@ const [isOpen, setIsOpen] = useState(false);
                 {
                     login ? 
                         <>
-                            <li><Link to="/">List</Link></li>
-                         <li><Link to="/add">Add Task</Link></li>
-                         <li><Link onClick={logout} >Logout</Link></li>
+                            <li  onClick={toggleMenu}><Link to="/">List</Link></li>
+                         <li  onClick={toggleMenu}><Link to="/add">Add Task</Link></li>
+                         <li  onClick={toggleMenu}><Link onClick={logout} >Logout</Link></li>
                         </> 
                          :  <>
-                         <li><Link to="/login" >Login</Link></li>
-                         <li><Link to="/signup">SignUp</Link></li>
+                         <li  onClick={toggleMenu}><Link to="/login" >Login</Link></li>
+                         <li  onClick={toggleMenu}><Link to="/signup">SignUp</Link></li>
                         </>
 
                  }
