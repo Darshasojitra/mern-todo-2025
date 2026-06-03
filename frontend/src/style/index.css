@@ -158,101 +158,98 @@ body {
         display: block;
     }
 
-    /* hide header row */
+    /* hide header */
     .list-header {
         display: none;
     }
 
-    /* each row block */
+    /* reset list items */
     .task-list li {
         display: block;
     }
 
-    /* group every 5 items into card */
+    /* create card container */
     .task-list li:nth-child(5n + 1) {
         margin-top: 15px;
-        border-radius: 10px;
-        padding: 12px;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        padding: 14px;
+        border-radius: 12px;
+        background: #ffffff;
+        border: 1px solid #e5e5e5;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    /* remove borders inside row */
+    /* clean inner rows */
     .list-item {
         border: none;
         background: transparent;
-        padding: 4px 0;
+        padding: 6px 0;
+        font-size: 15px;
+        color: #333;
     }
 
-    /* label style */
-    .task-list li:nth-child(5n + 1)::before {
-        content: "Select";
-        font-size: 12px;
-        color: #777;
-        display: block;
+    /* remove labels completely (clean UI) */
+    .task-list li::before {
+        content: none !important;
     }
 
-    .task-list li:nth-child(5n + 2)::before {
-        content: "S.No";
-        font-size: 12px;
-        color: #777;
-        display: block;
+    /* make description slightly smaller */
+    .task-list li:nth-child(5n + 4) {
+        color: #666;
+        font-size: 14px;
     }
 
-    .task-list li:nth-child(5n + 3)::before {
-        content: "Title";
-        font-size: 12px;
-        color: #777;
-        display: block;
-    }
-
-    .task-list li:nth-child(5n + 4)::before {
-        content: "Description";
-        font-size: 12px;
-        color: #777;
-        display: block;
-    }
-
-    .task-list li:nth-child(5n + 5)::before {
-        content: "Action";
-        font-size: 12px;
-        color: #777;
-        display: block;
-    }
-
-    /* spacing between fields */
-    .task-list li {
-        margin-bottom: 6px;
-    }
-
-    /* fix buttons layout */
+    /* action row */
     .task-list li:nth-child(5n + 5) {
         display: flex;
         gap: 10px;
         margin-top: 10px;
     }
 
-    .delete-item,
-    .update-item {
+    /* buttons styling */
+    .delete-item {
         flex: 1;
-        width: 100%;
-        margin: 0;
+        background-color: #ef4444;
+        border-radius: 6px;
+        padding: 8px;
+        font-size: 14px;
         text-align: center;
     }
 
+    .delete-item:hover {
+        background-color: #dc2626;
+    }
+
     .update-item {
-        padding: 6px 0;
+        flex: 1;
+        background-color: #3b82f6;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px;
+        text-decoration: none;
+        margin: 0;
     }
 
-    /* checkbox align */
-    input[type="checkbox"] {
+    .update-item:hover {
+        background-color: #2563eb;
+    }
+
+    /* checkbox alignment */
+    .task-list li:nth-child(5n + 1) input {
         transform: scale(1.2);
+        margin-bottom: 8px;
     }
 
-    /* container spacing */
+    /* spacing */
     .list-container {
         margin: 10px;
     }
+
+    /* delete multiple button fix */
+    .delete-multiple {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
+
 
