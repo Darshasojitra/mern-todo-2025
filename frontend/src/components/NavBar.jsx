@@ -28,21 +28,21 @@ function NavBar() {
         }
     }, [])
 
-    const menuToggle = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("nav-links");
 
-menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-});
+
+const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
     
     return (
         <nav className='navbar'>
             <div className='logo'>To Do App</div>
-             <div class="menu-toggle" id="menu-toggle">
+             <div class="menu-toggle" id="menu-toggle" onClick={toggleMenu} >
         ☰
     </div>
             
-            <ul className='nav-links'>
+            <ul className={`nav-links ${isOpen ? "active" : ""}`} >
                 
                 {
                     login ? 
